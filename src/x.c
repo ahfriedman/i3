@@ -364,16 +364,16 @@ static void x_draw_title_border(Con *con, struct deco_render_params *p, surface_
     Rect *dr = &(con->deco_rect);
 
     /* Left */
-    draw_util_rectangle(dest_surface, p->color->border,
-                        dr->x, dr->y, 1, dr->height);
+//    draw_util_rectangle(dest_surface, p->color->border,
+//                        dr->x, dr->y, 1, dr->height);
 
     /* Right */
-    draw_util_rectangle(dest_surface, p->color->border,
-                        dr->x + dr->width - 1, dr->y, 1, dr->height);
+//    draw_util_rectangle(dest_surface, p->color->border,
+//                        dr->x + dr->width - 1, dr->y, 1, dr->height);
 
     /* Top */
-    draw_util_rectangle(dest_surface, p->color->border,
-                        dr->x, dr->y, dr->width, 1);
+//    draw_util_rectangle(dest_surface, p->color->border,
+//                        dr->x, dr->y, dr->width, 1);
 
     /* Bottom */
     draw_util_rectangle(dest_surface, p->color->border,
