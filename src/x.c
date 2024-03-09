@@ -1129,6 +1129,23 @@ void x_push_node(Con *con) {
     /* Set _NET_FRAME_EXTENTS according to the actual decoration size. */
     if (con != NULL && con->window != NULL) {
         Rect bsr = con_border_style_rect(con);
+
+        /* Attempt to include stacked/tabbed titles. */
+        Con *parent = con->parent;
+        if (parent != NULL && (parent->layout == L_STACKED || parent->layout == L_TABBED)) {
+            uint32_t max_y = 0, max_height = 0;
+            TAILQ_FOREACH (current, &(parent->nodes_head), nodes) {
+                Rect *dr = &(current->deco_rect);
+                if (dr->y >= max_y && dr->height >= max_height) {
+                    max_y = dr->y;
+                    max_height = dr->height;
+                }
+            }
+            uint32_t total_deco_height = max_y + max_height;
+            bsr.y += total_deco_height;
+            bsr.height -= total_deco_height;
+        }
+
         Rect r = {
             bsr.x,                  /* left */
             0 - bsr.width - bsr.x,  /* right */
